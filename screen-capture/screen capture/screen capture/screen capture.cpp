@@ -15,9 +15,8 @@ using namespace std;
 int main(int argc, char** argv)
 {
 	//HWND hwnd = GetConsoleWindow();
-	//wstring my_str = L"Apex Legends";
 	LPCWSTR wide_string = NULL;
-	wide_string = L"Origin";
+	wide_string = L"Origin"; //desired window name
 	HWND hwnd = ::FindWindow(NULL, wide_string);
 	ShowWindow(hwnd, (SW_MAXIMIZE));
 	Sleep(1000);
@@ -50,7 +49,7 @@ int main(int argc, char** argv)
 	//BOOL bRet = BitBlt(hDc, x1, y1, x2, y2, hscreen, w, h, SRCCOPY);
 	OpenClipboard(NULL);
 	EmptyClipboard();
-	SetClipboardData(CF_BITMAP, hBitmap);
+	SetClipboardData(CF_BITMAP, hBitmap); //value copied to clipboard
 
 	CloseClipboard();
 	//String windowName = "My HelloWorld Window"; //Name of the window
