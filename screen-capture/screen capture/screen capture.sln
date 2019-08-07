@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "screen capture", "screen capture\screen capture.vcxproj", "{A741218E-726A-470A-870F-4DB6BDB69817}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A741218E-726A-470A-870F-4DB6BDB69817}.Debug|x64.ActiveCfg = Debug|x64
+		{A741218E-726A-470A-870F-4DB6BDB69817}.Debug|x64.Build.0 = Debug|x64
+		{A741218E-726A-470A-870F-4DB6BDB69817}.Debug|x86.ActiveCfg = Debug|x64
+		{A741218E-726A-470A-870F-4DB6BDB69817}.Debug|x86.Build.0 = Debug|x64
+		{A741218E-726A-470A-870F-4DB6BDB69817}.Release|x64.ActiveCfg = Release|x64
+		{A741218E-726A-470A-870F-4DB6BDB69817}.Release|x64.Build.0 = Release|x64
+		{A741218E-726A-470A-870F-4DB6BDB69817}.Release|x86.ActiveCfg = Release|Win32
+		{A741218E-726A-470A-870F-4DB6BDB69817}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F2BF01C9-24AE-4176-A4FC-F291B0DFAE3C}
+	EndGlobalSection
+EndGlobal
