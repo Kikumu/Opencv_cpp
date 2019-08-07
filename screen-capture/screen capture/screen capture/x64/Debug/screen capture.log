@@ -1,2 +1,3 @@
-﻿  screen capture.cpp
-  screen capture.vcxproj -> C:\Users\scowt\Desktop\opencv c++\screen-capture\screen capture\x64\Debug\screen capture.exe
+﻿  pch.cpp
+  screen capture.cpp
+  screen capture.vcxproj -> C:\Users\scowt\Documents\GitHub\opencv\Opencv_cpp\screen-capture\screen capture\x64\Debug\screen capture.exe

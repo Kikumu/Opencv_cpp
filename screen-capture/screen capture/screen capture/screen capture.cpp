@@ -4,7 +4,7 @@
 #include "pch.h"
 #include "windows.h"
 #include <iostream>
-
+#include <atlimage.h>
 #include <opencv2/opencv.hpp>
 #include <iostream>
 #include <string>
@@ -39,6 +39,9 @@ int main(int argc, char** argv)
 	HBITMAP hBitmap = CreateCompatibleBitmap(hscreen, w, h);
 	HGDIOBJ old_obj = SelectObject(hDc, hBitmap);
 	BOOL bRet = BitBlt(hDc, 0, 0, w, h, hscreen, x1, y1, SRCCOPY);
+	CImage image;
+	image.Attach(hBitmap);
+	image.Save(L"filename1.png");
 	/*if (bRet == FALSE)
 	{
 		cout << "YES";
