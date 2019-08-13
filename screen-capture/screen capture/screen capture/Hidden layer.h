@@ -65,13 +65,30 @@ inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hidden
 			//weight attatched to each neuron
 			//biases
 			Neuron iNeuron;
-
+			//limits are added to each neuron
 			size_t iLimitIn; //bias(bias has its own weight)
 			size_t iLimitOut;
 
 			if (i == 0)
 			{
-				iLimitIn = inputLayer.getListOfNeurons.
+				iLimitIn = inputLayer.getNumberOfNeuronsInLayer; 
+				//get number of inputs/neurons
+				//this probably will be a loop to grab all weight values and feed them into one neuron?
+				//all these values are then squeezed and transformed between values of zero and one(decimals)
+				//need to review this
+				//aaah its added i+1 because of bias
+				//link: https://www.quora.com/What-does-weight-mean-in-terms-of-neural-networks
+				if (storeListOfHiddenLayers.size() > 1)
+				{
+					//iLimitOut = inputLayer.getNumberOfNeuronsInLayer; //gets number of neurons in input layer
+					iLimitOut = storeListOfHiddenLayers[i + 1].getNumberOfNeuronsInLayer;
+				}
+				//if its only a one layered hidden layer
+				else if (storeListOfHiddenLayers.size() == 1)
+				{
+					//TODO: IMPLEMENT OUTPUT LAYER
+					iLimitOut = outputLayer.getNumberOfNeuronsInLayer;
+				}
 			}
 		}
 	}
