@@ -50,8 +50,8 @@ inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hidden
 {
 	//initialise weight of neurons coming in and out(dependant on number of neurons in layer
 	//vector<Neuron>NeuronsInHiddenLayer;
-	vector<double>incomingWeights;
-	vector<double>outgoingWeights;
+	vector<double>incomingWeights; //neuron "data" in
+	vector<double>outgoingWeights; //neuron "data" out
 
 	//what happens in each hidden layer. Heavy weight here
 	for (int i = 0; i < storeListOfHiddenLayers.size(); i++)
@@ -59,7 +59,20 @@ inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hidden
 		//what happens in each neuron in hidden layer
 		for (int j = 0; j < nNeuron.size(); j++)
 		{
+			//for first loop take in data(neurons) from input layer and multiply them by their weights
+			//y = sum of(weight * input) + bias
+			//y being the "value" of the neuron
+			//weight attatched to each neuron
+			//biases
+			Neuron iNeuron;
 
+			size_t iLimitIn; //bias(bias has its own weight)
+			size_t iLimitOut;
+
+			if (i == 0)
+			{
+				iLimitIn = inputLayer.getListOfNeurons.
+			}
 		}
 	}
 }
