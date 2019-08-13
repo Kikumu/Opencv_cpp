@@ -1,5 +1,6 @@
 #pragma once
 #include "pch.h"
+#include <iostream>
 #include <stdlib.h>
 #include <vector>
 #include "Neuron.h"
@@ -42,22 +43,25 @@ inline inputLayer & inputLayer::initLayer(inputLayer & inputLayer)
 		Neuron cNeuron; //create instance of neuron
 
 		listOfWeightsInTemp.push_back(cNeuron.initialiseNeuron()); //assigns weight to neuron randomly(see neuron.h)
-		cNeuron.weightsIn = listOfWeightsInTemp; //dont really know whats going on here. i understand but what i dont know is where are the weights initialised in neuron.h?
+		//cNeuron.setListOfIncomingWeights =listOfWeightsInTemp; //dont really know whats going on here. i understand but what i dont know is where are the weights initialised in neuron.h?
+		//cNeuron.setListOfIncomingWeights(listOfWeightsInTemp);
 		//well they are public so random values i guess? from main?
 		//yeah definitely from main. because the connections to layers may vary during training
 		pNeurons.push_back(cNeuron); //push back to vector the input vals
-		listOfWeightsInTemp.clear();
+		//listOfWeightsInTemp.clear();
 	}
+	Neuron cNeuron;
+	cNeuron.setListOfIncomingWeights(listOfWeightsInTemp);
+	listOfWeightsInTemp.clear();
+
 	inputLayer.Neurons = pNeurons; //initialise gathered neurons from loop into the input layer
 	return inputLayer;
 }
 
-inline void inputLayer::printLayer(inputLayer & inputLayer)//pass by reference
+inline void inputLayer::printLayer(inputLayer& inputLayer)//pass by reference
 {
-	cout <<" INPUT LAYER ";
-
-	int nNeuron = 1;
-
+      cout <<" INPUT LAYER ";
+	  int nNeuron = 1;
 	//for each neuron in layer initialise weights
 	for (Neuron& neuron : inputLayer.Neurons)
 	{
@@ -65,11 +69,13 @@ inline void inputLayer::printLayer(inputLayer & inputLayer)//pass by reference
 		cout << nNeuron;
 		cout << "\n";
 		cout << "input weights: ";
-		vector<double>weights = neuron.weightsIn;
-		for (double weight : weights)
-		{
-			cout << weight;
-		}
+		//vector<double*>weights = neuron.GetWeightsIn;
+		///*for (double weight : weights)
+		//{
+		//	cout << weight;
+		//}*/
+		
+		
 		nNeuron++;
 	}
 }

@@ -14,10 +14,12 @@ public:
 	void printLayer() const {}
 
 	//output number of neurons in layer
-	vector<Neuron>& getListOfNeurons() {
+	vector<Neuron>& getListOfNeurons()
+	{
 		//return ListOfNeuron;
 		//this->Neurons = getListOfNeurons
-		this->getListOfNeurons = Neurons;
+		//this->getListOfNeurons = Neurons;
+		return Neurons;
 	}
 
 	//set neuron list
@@ -26,7 +28,7 @@ public:
 		this->Neurons = ListOfNeurons;
 	}
 
-	size_t getNumberOfNeuronsInLayer()
+	size_t getNumberOfNeuronsInLayer() const
 	{
 		return numberOfNeuronsInLayer;
 	}

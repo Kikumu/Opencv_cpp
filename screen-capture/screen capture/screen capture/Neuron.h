@@ -16,14 +16,15 @@ public:
 	};
 
 	//set weights
-	void setListOfIncomingWeights(vector<double>&setList)
+	void setListOfIncomingWeights(vector<double>setList)
 	{
 		this->weightsIn = setList;
 	}
 
-	void setListOfOutgoingWeights(vector<double>&setlist)
+	void setListOfOutgoingWeights(vector <double>setlist)
 	{
-		this->weightsOut = setlist;
+		//this->setlist = weightsOut;
+		weightsOut = setlist;
 	}
 
 	//get weights and other values

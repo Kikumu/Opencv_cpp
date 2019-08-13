@@ -35,19 +35,23 @@ public:
 	//first val decide whats in the hidden layer, how many hidden layers do you need,input and output layers.
 	//restructure this to all neurons and vectors and layers to be designed in this function
 	//decided to put neurons here
-	vector<HiddenLayer> initialiseLayer(const HiddenLayer&, vector<HiddenLayer>&, const inputLayer&, const outputLayer&, vector<Neuron>&);
+	vector<HiddenLayer> initialiseLayer(const HiddenLayer&, vector<HiddenLayer>&, const inputLayer&, const outputLayer&);
 	void setNumberOfNeuronsInHiddenLayer(int numberOfNeurons) {
 		this->numberOfNeuronsInLayer = numberOfNeurons; //snapped from layer.h
 	}
 
-private:
+	size_t getNumberOfNeuronsInHiddenLayer()
+	{
+		this->getNumberOfNeuronsInHiddenLayer = getNumberOfNeuronsInLayer();
+	}
 
+private:
 
 };
 //NB: Disadvantages of inlining to consider:
 
 //go deep into benefits of inlining
-inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hiddenLayerDesign, vector<HiddenLayer>& storeListOfHiddenLayers, const inputLayer& inputLayer, const outputLayer& outputLayer, vector<Neuron>&nNeuron)
+inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hiddenLayerDesign, vector<HiddenLayer>& storeListOfHiddenLayers, const inputLayer& inputLayer, const outputLayer& outputLayer)
 {
 	
 	//initialise weight of neurons coming in and out(dependant on number of neurons in layer
@@ -60,7 +64,7 @@ inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hidden
 	for (int i = 0; i < storeListOfHiddenLayers.size(); i++)
 	{
 		//what happens in each neuron in hidden layer
-		for (int j = 0; j < nNeuron.size(); j++)
+		for (int j = 0; j < getNumberOfNeuronsInHiddenLayer(); j++)
 		{
 			//for first loop take in data(neurons) from input layer and multiply them by their weights
 			//y = sum of(weight * input) + bias
