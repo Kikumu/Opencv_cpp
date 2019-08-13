@@ -4,7 +4,7 @@
 #include "Layer.h"
 #include "inputLayer.h"
 #include "outputLayer.h"
-
+#include "Neuron.h"
 //TODO: Mutations
 //needs to receive all data from previous layers
 //similar to input layer but different
@@ -33,7 +33,8 @@ public:
 	//set neurons on here?
 	//first val decide whats in the hidden layer, how many hidden layers do you need,input and output layers.
 	//restructure this to all neurons and vectors and layers to be designed in this function
-	vector<HiddenLayer> initialiseLayer(const HiddenLayer&, vector<HiddenLayer>&, const inputLayer&, const outputLayer&);
+	//decided to put neurons here
+	vector<HiddenLayer> initialiseLayer(const HiddenLayer&, vector<HiddenLayer>&, const inputLayer&, const outputLayer&, vector<Neuron>&);
 	void setNumberOfNeuronsInHiddenLayer(int numberOfNeurons) {
 		this->numberOfNeuronsInLayer = numberOfNeurons; //snapped from layer.h
 	}
@@ -45,10 +46,10 @@ private:
 //NB: Disadvantages of inlining to consider:
 
 //go deep into benefits of inlining
-inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hiddenLayerDesign, vector<HiddenLayer>& storeListOfHiddenLayers, const inputLayer& inputLayer, const outputLayer& outputLayer)
+inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hiddenLayerDesign, vector<HiddenLayer>& storeListOfHiddenLayers, const inputLayer& inputLayer, const outputLayer& outputLayer, vector<Neuron>&nNeuron)
 {
 	//initialise weight of neurons coming in and out(dependant on number of neurons in layer
-	vector<Neuron>NeuronsInHiddenLayer;
+	//vector<Neuron>NeuronsInHiddenLayer;
 	vector<double>incomingWeights;
 	vector<double>outgoingWeights;
 
@@ -56,7 +57,7 @@ inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hidden
 	for (int i = 0; i < storeListOfHiddenLayers.size(); i++)
 	{
 		//what happens in each neuron in hidden layer
-		for (int j = 0; j < NeuronsInHiddenLayer.size() j++)
+		for (int j = 0; j < nNeuron.size(); j++)
 		{
 
 		}
