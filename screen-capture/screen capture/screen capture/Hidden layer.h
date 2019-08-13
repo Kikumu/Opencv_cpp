@@ -4,8 +4,9 @@
 #include "Layer.h"
 #include "inputLayer.h"
 #include "outputLayer.h"
-#include "Neuron.h"
+
 //TODO: Mutations
+//TOD0: FORWARD AND BACK PROPAGATION
 //needs to receive all data from previous layers
 //similar to input layer but different
 //functions are carried out here(activation functions, biases, drop outrates)
@@ -48,8 +49,10 @@ private:
 //go deep into benefits of inlining
 inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hiddenLayerDesign, vector<HiddenLayer>& storeListOfHiddenLayers, const inputLayer& inputLayer, const outputLayer& outputLayer, vector<Neuron>&nNeuron)
 {
+	
 	//initialise weight of neurons coming in and out(dependant on number of neurons in layer
-	//vector<Neuron>NeuronsInHiddenLayer;
+	//THIS REVIEW THIS
+	vector<Neuron>NeuronsInHiddenLayer;
 	vector<double>incomingWeights; //neuron "data" in
 	vector<double>outgoingWeights; //neuron "data" out
 
@@ -64,10 +67,11 @@ inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hidden
 			//y being the "value" of the neuron
 			//weight attatched to each neuron
 			//biases
+			//NEURON IS INITIALISED HERE
 			Neuron iNeuron;
-			//limits are added to each neuron
-			size_t iLimitIn; //bias(bias has its own weight)
-			size_t iLimitOut;
+			//limits are added to each neuron. ILIMIT IN AND ILIMIT OUT ARE JUST NEURONS
+			size_t iLimitIn; //bias(bias has its own weight).THESE ARE NEURONS. THEY GUIDE BIASES
+			size_t iLimitOut; //BIAS NEURONS
 
 			if (i == 0)
 			{
@@ -78,6 +82,7 @@ inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hidden
 				//need to review this
 				//aaah its added i+1 because of bias
 				//link: https://www.quora.com/What-does-weight-mean-in-terms-of-neural-networks
+				//the plusses and minuses are due to bias
 				if (storeListOfHiddenLayers.size() > 1)
 				{
 					//iLimitOut = inputLayer.getNumberOfNeuronsInLayer; //gets number of neurons in input layer
@@ -90,6 +95,36 @@ inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hidden
 					iLimitOut = outputLayer.getNumberOfNeuronsInLayer;
 				}
 			}
+			else if (i == (storeListOfHiddenLayers.size()-1))
+			{
+				iLimitIn = storeListOfHiddenLayers[i+1].getNumberOfNeuronsInLayer;
+				iLimitOut = outputLayer.getNumberOfNeuronsInLayer;
+			}
+			else
+			{
+				iLimitIn = storeListOfHiddenLayers[i + 1].getNumberOfNeuronsInLayer;
+				iLimitOut = outputLayer.getNumberOfNeuronsInLayer;
+			}
+
+			iLimitIn--; 
+			iLimitOut++;
+
+			if (j >= 1)
+			{
+				for (size_t k = 0; k <= iLimitIn; k++)
+				{
+					//WEIGHT INITIALISED AND STORED HERE
+					incomingWeights.push_back(iNeuron.initialiseNeuron());
+					
+				}
+			}
+			for (size_t k = 0; k <= iLimitOut; k++) {
+				outgoingWeights.push_back(iNeuron.initialiseNeuron());
+			}
+
+			iNeuron.setListOfIncomingWeights(incomingWeights);
+			iNeuron.setListOfOutgoingWeights(outgoingWeights);
+			
 		}
 	}
 }
