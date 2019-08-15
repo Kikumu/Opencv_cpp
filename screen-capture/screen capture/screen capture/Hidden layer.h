@@ -37,12 +37,16 @@ public:
 	//decided to put neurons here
 	vector<HiddenLayer> initialiseLayer(const HiddenLayer&, vector<HiddenLayer>&, const inputLayer&, const outputLayer&);
 	void setNumberOfNeuronsInHiddenLayer(int numberOfNeurons) {
-		this->numberOfNeuronsInLayer = numberOfNeurons; //snapped from layer.h
+		//this->numberOfNeuronsInLayer = numberOfNeurons; //snapped from layer.h
+		//Layer l;
+		setNumberOfNeuronsInLayer(numberOfNeurons);
 	}
 
 	size_t getNumberOfNeuronsInHiddenLayer()
 	{
-		this->getNumberOfNeuronsInHiddenLayer = getNumberOfNeuronsInLayer();
+		//this->getNumberOfNeuronsInHiddenLayer = getNumberOfNeuronsInLayer();
+		//return getNumberOfNeuronsInLayer();
+		return getNumberOfNeuronsInLayer();
 	}
 
 private:

@@ -18,22 +18,21 @@ public:
 	//set weights
 	void setListOfIncomingWeights(vector<double>setList)
 	{
-		this->weightsIn = setList;
+		weightsIn = setList;
 	}
 
 	void setListOfOutgoingWeights(vector <double>setlist)
 	{
-		//this->setlist = weightsOut;
 		weightsOut = setlist;
 	}
 
-	//get weights and other values
-	vector<double>GetWeightsIn()
+	//get weights and other values(returns a reference)
+	vector<double>&GetWeightsIn()
 	{
 		return weightsIn;
 	}
 
-	vector<double>GetWeightsOut()
+	vector<double>&GetWeightsOut()
 	{
 		return weightsOut;
 	}
@@ -43,7 +42,7 @@ public:
 		return error;
 	}
 
-
+//training done in training.h
 private:
 	
 	vector<double>weightsIn; //weight values passed into neuron

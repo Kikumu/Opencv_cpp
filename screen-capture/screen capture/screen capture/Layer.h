@@ -25,13 +25,20 @@ public:
 	//set neuron list
 	void setListOfNeurons(vector<Neuron>&ListOfNeurons)
 	{
-		this->Neurons = ListOfNeurons;
+		Neurons = ListOfNeurons;
+	}
+
+	void setNumberOfNeuronsInLayer(int number)
+	{
+		numberOfNeuronsInLayer = number;
 	}
 
 	size_t getNumberOfNeuronsInLayer() const
 	{
 		return numberOfNeuronsInLayer;
 	}
+
+	
 protected:
 	vector<Neuron>Neurons;
 	//dictate number of neurons
