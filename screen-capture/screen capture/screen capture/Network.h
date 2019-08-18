@@ -3,6 +3,7 @@
 //BIASES HAVE A VECTOR OF ONES?
 //why do we need to transpose?
 //to avoid mis multiplication of the matrices
+
 #include "Hidden layer.h"
 #include "Layer.h"
 #include "Matrix.h"
@@ -36,6 +37,16 @@ private:
 	int maxEpochs;
 	//basically the amount of time data passes through before weights are updated?
 	//similar to LR?
+	//link assist?: https://towardsdatascience.com/epoch-vs-iterations-vs-batch-size-4dfb9c7ce9c9
+	double LearningRate;
+	double targetError;
+	double trainingError;
+	double MeanError;
+
+	vector<double>listOfMSE;
+	//measures network performance as per errors
+	//mse definition link: https://edoras.sdsu.edu/doc/matlab/toolbox/nnet/mse.html
+
 };
 
 Network::Network()
