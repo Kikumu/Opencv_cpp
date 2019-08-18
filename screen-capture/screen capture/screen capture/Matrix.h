@@ -4,7 +4,8 @@
 #include <assert.h>
 #include <iostream>
 #include <iomanip>
-
+//link: https://www.geeksforgeeks.org/c-program-multiply-two-matrices/
+//LINK assist: https://towardsdatascience.com/everything-you-need-to-know-about-neural-networks-and-backpropagation-machine-learning-made-easy-e5285bc2be3a
 class Matrix
 {
 public:
