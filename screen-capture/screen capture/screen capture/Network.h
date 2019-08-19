@@ -46,7 +46,79 @@ private:
 	vector<double>listOfMSE;
 	//measures network performance as per errors
 	//mse definition link: https://edoras.sdsu.edu/doc/matlab/toolbox/nnet/mse.html
+	ActivationFncENUM activationFunc; //switch activatio func mode
+	ActivationFncENUM activationOutput; //switch output type "activation"
+	TrainingTypesENUM trainType; //back propagate opt etc etc
 
+public:
+	//inputLayer &getInputLayer()
+	//getters and setters
+	void getInputLayer() {
+		return inputLayer.printLayer;
+	}
+	void getHiddenLayer() //not done
+	{
+		//return HiddenLayer.;
+	}
+	int getMaxEpochs()
+	{
+		return maxEpochs;
+	}
+
+	int getTargetError()
+	{
+		return targetError;
+	}
+
+	double getLearningRate() {
+		return LearningRate;
+	}
+
+	double GetErrorMean() {
+		return trainingError;
+	}
+
+	double getMeanError() {
+		return MeanError;
+	}
+
+	ActivationFncENUM getActivationfunction() {
+		return activationFunc;
+	}
+
+	TrainingTypesENUM getTrainingType() {
+		return trainType;
+	}
+
+	void setTrainingType(TrainingTypesENUM t) {
+		trainType = t;
+	}
+
+	void setActivationFunction(ActivationFncENUM e) {
+		activationFunc = e;
+	}
+
+	void setLearningRate(const double s) {
+		LearningRate = s;
+	}
+
+	void setEpochs(const int e) {
+		maxEpochs = e;
+	}
+
+	//accepts neurons. inputlayer is basically made up of neurons
+	void setInputLayer(vector<Neuron>Neurons){
+		inputLayer.setListOfNeurons(Neurons);
+	 }
+	
+	void setHiddenLayer(vector<HiddenLayer>L) {
+		//set number of neurons and copy paste the "empty" neurons to the new empty layers
+		//hiddenLayer.setListOfNeurons
+		//hiddenLayer = Layer;
+		listOfHiddenLayer = L;
+	}
+
+	
 };
 
 Network::Network()
