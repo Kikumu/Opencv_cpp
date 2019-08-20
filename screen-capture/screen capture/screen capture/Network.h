@@ -18,7 +18,7 @@ public:
 	Network();
 	~Network();
 
-	Network initializeNetwork(int numberOfInputNeurons, int numberOfHiddenLayers, int NumberOfHiddenLayerNeurons, int numberOfOutputNeurons); //design network
+	Network initializeNetwork(vector<Neuron>InputNeurons, vector<Neuron>ListOfNeuronsInHiddenLayer, int NumberOfHiddenLayers, vector<Neuron>outputLayer); //design network
 	Network trainNetwork(Network n);
 	void printNetwork(Network n);
 	void printTrainedResult(Network n);
@@ -129,10 +129,27 @@ Network::~Network()
 {
 }
 
-inline Network Network::initializeNetwork(int numberOfInputNeurons, int numberOfHiddenLayers, int NumberOfHiddenLayerNeurons, int numberOfOutputNeurons)
+//connect input with hidden layer with output
+inline Network Network::initializeNetwork(vector<Neuron>InputNeurons, vector<Neuron>ListOfNeuronsInHiddenLayer, int NumberOfHiddenLayers, vector<Neuron>outputLayer)
 {
-	return Network();
+	//inputLayer.setListOfNeurons = 
+	inputLayer.setListOfNeurons(InputNeurons);
+	for (int i = 0; i < numberOfHiddenLayers; i++) {
+		hiddenLayer.setListOfNeurons(ListOfNeuronsInHiddenLayer);
+		listOfHiddenLayer.push_back(hiddenLayer);
+	}
+	outputLayer.setNumberOfNeuronsInLayer(outputLayer);
+	//need to connect the list of hidden layer with input and outputlayer
+	
+	Network neuralNetwork;
+	neuralNetwork.setInputLayer(InputNeurons);
+	neuralNetwork.setHiddenLayer(listOfHiddenLayer);
+	neuralNetwork.setOutputLayer(outputNeuron);
+
+	return neuralNetwork;
 }
+
+
 inline Network Network::trainNetwork(Network n)
 {
 	return Network();
