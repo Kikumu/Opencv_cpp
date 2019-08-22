@@ -17,15 +17,18 @@ class Network
 public:
 	Network();
 	~Network();
+	//NB: YOU WILL HAVE TO DESIGN INPUT AND OUTPUT LAYER FIRST BEFORE PASSING THEM INTO THE NETWORK
+	//NB: NO NEED TO CREATE NEW NEURON VARIABLES BECAUSE THEY WILL ALL HAVE THEIR OWN BECAUSE THEY ALL EXTRACT DATA FROM PARENT/BASE CLASS(LAYER). YOU WILL JUST NEED TO SET HOW MANY NEURONS YOU NEED
+	//EXAMPLE: "INPUTLAYER.SETLISTOFNEURONS(VECTOR<NEURONS>N)"
 
-	Network initializeNetwork(vector<Neuron>InputNeurons, vector<Neuron>ListOfNeuronsInHiddenLayer, int NumberOfHiddenLayers, vector<Neuron>outputLayer); //design network
+	Network initializeNetwork(inputLayer Input, vector<Neuron>ListOfNeuronsInHiddenLayer, int NumberOfHiddenLayers, outputLayer Output); //design network
 	Network trainNetwork(Network n);
 	void printNetwork(Network n);
 	void printTrainedResult(Network n);
 private:
-	inputLayer inputLayer;
+	inputLayer InputLayer;
 	HiddenLayer hiddenLayer;
-	outputLayer outputLayer;
+	outputLayer OutputLayer;
 	vector<HiddenLayer>listOfHiddenLayer;
 	int numberOfHiddenLayers;
 
@@ -54,7 +57,7 @@ public:
 	//inputLayer &getInputLayer()
 	//getters and setters
 	void getInputLayer() {
-		return inputLayer.printLayer;
+		return InputLayer.printLayer;
 	}
 	void getHiddenLayer() //not done
 	{
@@ -105,19 +108,20 @@ public:
 	void setEpochs(const int e) {
 		maxEpochs = e;
 	}
-
-	//accepts neurons. inputlayer is basically made up of neurons
-	void setInputLayer(vector<Neuron>Neurons){
-		inputLayer.setListOfNeurons(Neurons);
-	 }
 	
 	void setHiddenLayer(vector<HiddenLayer>L) {
-		//set number of neurons and copy paste the "empty" neurons to the new empty layers
-		//hiddenLayer.setListOfNeurons
-		//hiddenLayer = Layer;
 		listOfHiddenLayer = L;
 	}
 
+	void setInputLayer(inputLayer I) {
+		InputLayer = I;
+	}
+
+	void setOutputLayer(outputLayer O) {
+		OutputLayer = O;
+	}
+	
+	
 	
 };
 
@@ -130,29 +134,40 @@ Network::~Network()
 }
 
 //connect input with hidden layer with output
-inline Network Network::initializeNetwork(vector<Neuron>InputNeurons, vector<Neuron>ListOfNeuronsInHiddenLayer, int NumberOfHiddenLayers, vector<Neuron>outputLayer)
+inline Network Network::initializeNetwork(inputLayer Input, vector<Neuron>ListOfNeuronsInHiddenLayer, int NumberOfHiddenLayers, outputLayer Output)
 {
-	//inputLayer.setListOfNeurons = 
-	inputLayer.setListOfNeurons(InputNeurons);
 	for (int i = 0; i < numberOfHiddenLayers; i++) {
 		hiddenLayer.setListOfNeurons(ListOfNeuronsInHiddenLayer);
 		listOfHiddenLayer.push_back(hiddenLayer);
 	}
-	outputLayer.setNumberOfNeuronsInLayer(outputLayer);
-	//need to connect the list of hidden layer with input and outputlayer
-	
-	Network neuralNetwork;
-	neuralNetwork.setInputLayer(InputNeurons);
-	neuralNetwork.setHiddenLayer(listOfHiddenLayer);
-	neuralNetwork.setOutputLayer(outputNeuron);
 
+	Network neuralNetwork;
+	neuralNetwork.setInputLayer(Input); //FIXED
+	neuralNetwork.setHiddenLayer(listOfHiddenLayer); //FIXED
+	neuralNetwork.setOutputLayer(Output);//FIXED
 	return neuralNetwork;
 }
 
-
 inline Network Network::trainNetwork(Network n)
 {
-	return Network();
+	Network trainedNetwork;
+	switch (n.trainType)
+	{
+		//to be implemented
+	case TrainingTypesENUM::PERCEPTRON:
+	{
+		//PERCEPTRON h;
+		//trainedNetwork
+		return trainedNetwork;
+	}
+	case TrainingTypesENUM::BACKPROPAGATION:
+	{
+		return trainedNetwork;
+	}
+	default:
+		cout << "Error network not trained";
+	}
+	return trainedNetwork;
 }
 inline void Network::printNetwork(Network n)
 {
