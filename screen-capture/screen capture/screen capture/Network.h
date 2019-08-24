@@ -1,5 +1,4 @@
 #pragma once
-//link assist: https://towardsdatascience.com/under-the-hood-of-neural-network-forward-propagation-the-dreaded-matrix-multiplication-a5360b33426
 //BIASES HAVE A VECTOR OF ONES?
 //why do we need to transpose?
 //to avoid mis multiplication of the matrices
@@ -36,11 +35,9 @@ private:
 	vector<double> realOutputSet; //what does this do?
 	vector<vector<double>>realMatrixOutputSet; //have an idea what it does but not sure tho
 	
-    //what are epochs? link: https://uk.mathworks.com/matlabcentral/answers/62668-what-is-epoch-in-neural-network
 	int maxEpochs;
 	//basically the amount of time data passes through before weights are updated?
 	//similar to LR?
-	//link assist?: https://towardsdatascience.com/epoch-vs-iterations-vs-batch-size-4dfb9c7ce9c9
 	double LearningRate;
 	double targetError;
 	double trainingError;
@@ -48,7 +45,6 @@ private:
 
 	vector<double>listOfMSE;
 	//measures network performance as per errors
-	//mse definition link: https://edoras.sdsu.edu/doc/matlab/toolbox/nnet/mse.html
 	ActivationFncENUM activationFunc; //switch activatio func mode
 	ActivationFncENUM activationOutput; //switch output type "activation"
 	TrainingTypesENUM trainType; //back propagate opt etc etc
@@ -84,7 +80,9 @@ public:
 	double getMeanError() {
 		return MeanError;
 	}
-
+	vector<vector<double>>getTrainedSet() { //hypothesis, stores weights?
+		return trainset;
+	}
 	ActivationFncENUM getActivationfunction() {
 		return activationFunc;
 	}
@@ -121,7 +119,9 @@ public:
 		OutputLayer = O;
 	}
 	
-	
+	void setTrainSet(vector<vector<double>>n) {
+		trainset = n;
+	}
 	
 };
 

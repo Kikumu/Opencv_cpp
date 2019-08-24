@@ -35,16 +35,18 @@ public:
 	//first val decide whats in the hidden layer, how many hidden layers do you need,input and output layers.
 	//restructure this to all neurons and vectors and layers to be designed in this function
 	//decided to put neurons here
-	vector<HiddenLayer> initialiseLayer(const HiddenLayer&, vector<HiddenLayer>&, const inputLayer&, const outputLayer&);
-	void setNumberOfNeuronsInHiddenLayer(int numberOfNeurons) {
-		//this->numberOfNeuronsInLayer = numberOfNeurons; //snapped from layer.h
-		//Layer l;
-		setNumberOfNeuronsInLayer(numberOfNeurons);
-	}
+	vector<HiddenLayer> initialiseLayer(vector<HiddenLayer> storeListOfHiddenLayers, const inputLayer& inputLayer, const outputLayer& outputLayer);
+
+	//void setNumberOfNeuronsInHiddenLayer(int numberOfNeurons) {
+	//	//this->numberOfNeuronsInLayer = numberOfNeurons; //snapped from layer.h
+	//	//Layer l;
+	//	setNumberOfNeuronsInLayer(numberOfNeurons);
+	//}
 
 	size_t getNumberOfNeuronsInHiddenLayer()
 	{
 		//this->getNumberOfNeuronsInHiddenLayer = getNumberOfNeuronsInLayer();
+		//return getNumberOfNeuronsInLayer();
 		//return getNumberOfNeuronsInLayer();
 		return getNumberOfNeuronsInLayer();
 	}
@@ -53,9 +55,14 @@ private:
 
 };
 //NB: Disadvantages of inlining to consider:
-
 //go deep into benefits of inlining
-inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hiddenLayerDesign, vector<HiddenLayer>& storeListOfHiddenLayers, const inputLayer& inputLayer, const outputLayer& outputLayer)
+
+
+
+
+
+
+inline vector<HiddenLayer>HiddenLayer::initialiseLayer(vector<HiddenLayer> storeListOfHiddenLayers, const inputLayer& inputLayer, const outputLayer& outputLayer)
 {
 	
 	//initialise weight of neurons coming in and out(dependant on number of neurons in layer
@@ -64,32 +71,27 @@ inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hidden
 	vector<double>incomingWeights; //neuron "data" in
 	vector<double>outgoingWeights; //neuron "data" out
 
-	//what happens in each hidden layer. Heavy weight here
+	//FOUND ERRORS. RE-IMPLEMENTING.....
 	for (int i = 0; i < storeListOfHiddenLayers.size(); i++)
 	{
 		//what happens in each neuron in hidden layer
 		for (int j = 0; j < getNumberOfNeuronsInHiddenLayer(); j++)
 		{
-			//for first loop take in data(neurons) from input layer and multiply them by their weights
-			//y = sum of(weight * input) + bias
-			//y being the "value" of the neuron
-			//weight attatched to each neuron
-			//biases
-			//NEURON IS INITIALISED HERE
 			Neuron iNeuron;
 			//limits are added to each neuron. ILIMIT IN AND ILIMIT OUT ARE JUST NEURONS
-			size_t iLimitIn; //bias(bias has its own weight).THESE ARE NEURONS. THEY GUIDE BIASES
-			size_t iLimitOut; //BIAS NEURONS
+			size_t iLimitIn; //current number of neurons
+			size_t iLimitOut; //new number of neurons(+ bias)
 
+			//for each layer put a bias
+			//after initialising all neurons in a vector put a bias
 			if (i == 0)
 			{
-				iLimitIn = inputLayer.getNumberOfNeuronsInLayer; 
+				iLimitIn = inputLayer.getNumberOfNeuronsInLayer;
 				//get number of inputs/neurons
 				//this probably will be a loop to grab all weight values and feed them into one neuron?
 				//all these values are then squeezed and transformed between values of zero and one(decimals)
 				//need to review this
 				//aaah its added i+1 because of bias
-				//link: https://www.quora.com/What-does-weight-mean-in-terms-of-neural-networks
 				//the plusses and minuses are due to bias
 				if (storeListOfHiddenLayers.size() > 1)
 				{
@@ -103,9 +105,9 @@ inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hidden
 					iLimitOut = outputLayer.getNumberOfNeuronsInLayer;
 				}
 			}
-			else if (i == (storeListOfHiddenLayers.size()-1))
+			else if (i == (storeListOfHiddenLayers.size() - 1))
 			{
-				iLimitIn = storeListOfHiddenLayers[i+1].getNumberOfNeuronsInLayer;
+				iLimitIn = storeListOfHiddenLayers[i + 1].getNumberOfNeuronsInLayer;
 				iLimitOut = outputLayer.getNumberOfNeuronsInLayer;
 			}
 			else
@@ -113,26 +115,23 @@ inline vector<HiddenLayer>HiddenLayer::initialiseLayer(const HiddenLayer& hidden
 				iLimitIn = storeListOfHiddenLayers[i + 1].getNumberOfNeuronsInLayer;
 				iLimitOut = outputLayer.getNumberOfNeuronsInLayer;
 			}
-
-			iLimitIn--; 
+			iLimitIn--;
 			iLimitOut++;
-
 			if (j >= 1)
 			{
 				for (size_t k = 0; k <= iLimitIn; k++)
 				{
 					//WEIGHT INITIALISED AND STORED HERE
 					incomingWeights.push_back(iNeuron.initialiseNeuron());
-					
+
 				}
 			}
 			for (size_t k = 0; k <= iLimitOut; k++) {
 				outgoingWeights.push_back(iNeuron.initialiseNeuron());
 			}
-
 			iNeuron.setListOfIncomingWeights(incomingWeights);
 			iNeuron.setListOfOutgoingWeights(outgoingWeights);
-			
 		}
 	}
+	return storeListOfHiddenLayers;
 }
