@@ -136,11 +136,6 @@ Network::~Network()
 //connect input with hidden layer with output
 inline Network Network::initializeNetwork(inputLayer Input, vector<Neuron>ListOfNeuronsInHiddenLayer, int NumberOfHiddenLayers, outputLayer Output)
 {
-	for (int i = 0; i < numberOfHiddenLayers; i++) {
-		hiddenLayer.setListOfNeurons(ListOfNeuronsInHiddenLayer);
-		listOfHiddenLayer.push_back(hiddenLayer);
-	}
-
 	Network neuralNetwork;
 	neuralNetwork.setInputLayer(Input); //FIXED
 	neuralNetwork.setHiddenLayer(listOfHiddenLayer); //FIXED

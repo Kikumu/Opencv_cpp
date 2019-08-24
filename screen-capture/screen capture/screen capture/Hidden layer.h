@@ -7,12 +7,7 @@
 
 //TODO: Mutations
 //TOD0: FORWARD AND BACK PROPAGATION
-//needs to receive all data from previous layers
-//similar to input layer but different
-//functions are carried out here(activation functions, biases, drop outrates)
-//confidence rates, probabilities, decision making etc etc
-//'confidence scores' for which decision it decided to ultimately make
-
+//needs to receive all data from previous layers(this will be done and linked during network and training)
 using namespace std;
 
 class HiddenLayer : public Layer {
@@ -29,109 +24,49 @@ public:
 
 	}
 	//take in a vector of hidden layers, dependant on how many hidden layers you would like to have
-	//take an input layer
-	//take an output layer
 	//set neurons on here?
-	//first val decide whats in the hidden layer, how many hidden layers do you need,input and output layers.
-	//restructure this to all neurons and vectors and layers to be designed in this function
-	//decided to put neurons here
-	vector<HiddenLayer> initialiseLayer(vector<HiddenLayer> storeListOfHiddenLayers, const inputLayer& inputLayer, const outputLayer& outputLayer);
-
-	//void setNumberOfNeuronsInHiddenLayer(int numberOfNeurons) {
-	//	//this->numberOfNeuronsInLayer = numberOfNeurons; //snapped from layer.h
-	//	//Layer l;
-	//	setNumberOfNeuronsInLayer(numberOfNeurons);
-	//}
-
+	vector<HiddenLayer> initialiseLayer(outputLayer output, inputLayer input, vector<HiddenLayer> storeListOfHiddenLayers,int numberOfNeuronsInHiddenLayer);
 	size_t getNumberOfNeuronsInHiddenLayer()
 	{
-		//this->getNumberOfNeuronsInHiddenLayer = getNumberOfNeuronsInLayer();
-		//return getNumberOfNeuronsInLayer();
-		//return getNumberOfNeuronsInLayer();
-		return getNumberOfNeuronsInLayer();
+		return getNumberOfNeuronsInLayer(); //returns number of neurons in a layer
 	}
 
 private:
 
 };
-//NB: Disadvantages of inlining to consider:
-//go deep into benefits of inlining
-
-
-
-
-
-
-inline vector<HiddenLayer>HiddenLayer::initialiseLayer(vector<HiddenLayer> storeListOfHiddenLayers, const inputLayer& inputLayer, const outputLayer& outputLayer)
+//YOU NEED THE INPUT AND OUTPUT LAYER TO MAKE THE HIDDEn LAYER PROPERLY
+inline vector<HiddenLayer>HiddenLayer::initialiseLayer(outputLayer output,inputLayer input, vector<HiddenLayer> storeListOfHiddenLayers, int numberOfNeuronsInHiddenLayer)
 {
-	
-	//initialise weight of neurons coming in and out(dependant on number of neurons in layer
 	//THIS REVIEW THIS
-	vector<Neuron>NeuronsInHiddenLayer;
-	vector<double>incomingWeights; //neuron "data" in
-	vector<double>outgoingWeights; //neuron "data" out
-
+	vector<double>incomingWeights; //neuron "weights" in
+	vector<double>outgoingWeights; //neuron "weights" out
+	vector<Neuron>Temp; //storing temporary neurons
+	vector<double>Dtemp; //storing temporary weights
 	//FOUND ERRORS. RE-IMPLEMENTING.....
-	for (int i = 0; i < storeListOfHiddenLayers.size(); i++)
+	//step 1, set up hidden layer without biases(done)
+	//step 2, add biases(added)
+	//step 3, set up weights
+	//NOTE: First layer is connected to the INPUT LAYER and last layer is connected to the OUTPUT LAYER. SET WEIGHTS ACCORDINGLY
+
+	for (int i = 0; i < storeListOfHiddenLayers.size(); i++) //for each layer
 	{
-		//what happens in each neuron in hidden layer
-		for (int j = 0; j < getNumberOfNeuronsInHiddenLayer(); j++)
-		{
-			Neuron iNeuron;
-			//limits are added to each neuron. ILIMIT IN AND ILIMIT OUT ARE JUST NEURONS
-			size_t iLimitIn; //current number of neurons
-			size_t iLimitOut; //new number of neurons(+ bias)
-
-			//for each layer put a bias
-			//after initialising all neurons in a vector put a bias
-			if (i == 0)
-			{
-				iLimitIn = inputLayer.getNumberOfNeuronsInLayer;
-				//get number of inputs/neurons
-				//this probably will be a loop to grab all weight values and feed them into one neuron?
-				//all these values are then squeezed and transformed between values of zero and one(decimals)
-				//need to review this
-				//aaah its added i+1 because of bias
-				//the plusses and minuses are due to bias
-				if (storeListOfHiddenLayers.size() > 1)
-				{
-					//iLimitOut = inputLayer.getNumberOfNeuronsInLayer; //gets number of neurons in input layer
-					iLimitOut = storeListOfHiddenLayers[i + 1].getNumberOfNeuronsInLayer;
-				}
-				//if its only a one layered hidden layer
-				else if (storeListOfHiddenLayers.size() == 1)
-				{
-					//TODO: IMPLEMENT OUTPUT LAYER
-					iLimitOut = outputLayer.getNumberOfNeuronsInLayer;
-				}
-			}
-			else if (i == (storeListOfHiddenLayers.size() - 1))
-			{
-				iLimitIn = storeListOfHiddenLayers[i + 1].getNumberOfNeuronsInLayer;
-				iLimitOut = outputLayer.getNumberOfNeuronsInLayer;
-			}
-			else
-			{
-				iLimitIn = storeListOfHiddenLayers[i + 1].getNumberOfNeuronsInLayer;
-				iLimitOut = outputLayer.getNumberOfNeuronsInLayer;
-			}
-			iLimitIn--;
-			iLimitOut++;
-			if (j >= 1)
-			{
-				for (size_t k = 0; k <= iLimitIn; k++)
-				{
-					//WEIGHT INITIALISED AND STORED HERE
-					incomingWeights.push_back(iNeuron.initialiseNeuron());
-
-				}
-			}
-			for (size_t k = 0; k <= iLimitOut; k++) {
-				outgoingWeights.push_back(iNeuron.initialiseNeuron());
-			}
-			iNeuron.setListOfIncomingWeights(incomingWeights);
-			iNeuron.setListOfOutgoingWeights(outgoingWeights);
+		if (i == 0) {
+			//get number of neurons from input layer
+			//extract weights leaving the input layer
+			
 		}
+		for (int j = 0; j < numberOfNeuronsInHiddenLayer; j++) {
+			//create number of desired neurons as per variable stated
+			//and push them back as per number in hidden layer
+			Neuron hNeuron;
+			Temp.push_back(hNeuron);
+		}
+		Neuron bNeuron; //bias added to each layer
+		Temp.push_back(bNeuron);//bias neuron
+		//push back neuron to desired layer
+		storeListOfHiddenLayers[i].setListOfNeurons(Temp);
+		//clear neuron vector
+		Temp.clear();
 	}
 	return storeListOfHiddenLayers;
 }
